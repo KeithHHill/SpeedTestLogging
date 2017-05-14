@@ -1,7 +1,7 @@
 # Created by Keith Hill
 # May 2017
 
-# Need Python 2.7 and speedtest-cli and pathlib and smtplib packages
+# Need Python 2.7 and speedtest-cli and smtplib packages
 
 # Description: Run a speed test and record the results in a CSV file
 #               send an email if the speed is too low

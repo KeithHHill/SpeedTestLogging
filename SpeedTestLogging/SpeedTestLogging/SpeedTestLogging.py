@@ -4,7 +4,6 @@ import speedtest
 import datetime
 import ConfigParser
 import csv
-from pathlib import Path
 import smtplib
 
 myPath = os.path.dirname(os.path.abspath(__file__))
