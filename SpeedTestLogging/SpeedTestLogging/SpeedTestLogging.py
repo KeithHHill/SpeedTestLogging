@@ -132,7 +132,9 @@ def emailResults(results) :
         
             # compose the message
             msg = "\r\n".join([
-                  "Subject: " + subject,
+                "From: " + fromaddr,
+                "To: " + toaddr,
+                "Subject: " + subject,
                   "",
                   message + " \n download = " + str(round(results.download,2)) + " \n upload = " + str(round(results.upload,2))
                   ])
