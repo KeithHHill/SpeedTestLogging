@@ -68,6 +68,12 @@ def logResults (results) :
         print ("error accessing the log file.  Ensure file titled 'config.ini' exists.")
         raise
     
+    
+    #make sure the logging folder exists
+    if not(os.path.isdir(myPath + "/logging/")) :
+        os.makedirs(myPath + "/logging/")
+
+
     logFile = myPath +"/logging/current_log.csv"
 
     # determine if a file exists.  If not, create it.
@@ -84,6 +90,10 @@ def logResults (results) :
     if os.path.getsize(logFile) > maxSize :
         print("file too large. Archiving")
          
+        #check and make sure an archive folder exists
+        if not(os.path.isdir(myPath + "/logging/archive")) :
+            os.makedirs(myPath + "/logging/archive")
+
         name = str(datetime.datetime.now()).replace('-','').replace(':','').replace('.','').replace(' ','')+".csv"
         archiveFile = myPath + "/logging/archive/"+ name
         os.rename(logFile,archiveFile)
