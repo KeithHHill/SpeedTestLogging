@@ -2,6 +2,7 @@ import os
 import io
 import speedtest
 import datetime
+import time
 import ConfigParser
 import csv
 import smtplib
@@ -14,6 +15,7 @@ def executeTest ( ) :
     s = speedtest.Speedtest()
     # results = speedtest.SpeedtestResults()
 
+    
     print("Beginning speed test.  Finding best server")
 
     s.get_best_server()
@@ -23,7 +25,6 @@ def executeTest ( ) :
     start = datetime.datetime.now()
     download = s.download()
     end = datetime.datetime.now()
-
 
     
     # find time it took and conver it to MB/s
@@ -55,6 +56,13 @@ def executeTest ( ) :
     print(" ")
     s.results.download = mbsDown
     s.results.upload = mbsUp
+    
+    
+    #use system time instead of GMT which is the default returned
+    myTime = time.localtime()
+    timeString = time.strftime("%Y-%m-%d %H:%M:%S",myTime)
+    s.results.timestamp = timeString  
+
     return (s.results)
 
 
