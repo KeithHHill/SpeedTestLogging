@@ -66,7 +66,7 @@ def executeTest ( ) :
     return (s.results)
 
 
-def logResults (results, mode) :
+def logResults (results, mode, count) :
    # Results are a passed dataset of speed test results.  
    # Mode indicates if the logging is through the standard or extended logging.
    
@@ -83,11 +83,12 @@ def logResults (results, mode) :
         logDirectory = "/logging"
         archiveDirectory = logDirectory+ "/archive"
         logFile = myPath + logDirectory + "/current_log.csv"
+       
     elif mode == "extended" :
         logDirectory = "/logging"
         archiveDirectory = logDirectory+ "/archiveExtended"
         logFile = myPath + logDirectory + "/extended_log.csv"
-        
+               
 
 
     
@@ -110,7 +111,8 @@ def logResults (results, mode) :
 
 
     # determine if it is too large.  If so, archive it and create a new one
-    if os.path.getsize(logFile) > maxSize :
+    # for extended logging, only do this for the first pass through
+    if os.path.getsize(logFile) > maxSize and count == 0 :
         print("file too large. Archiving")
          
         #check and make sure an archive folder exists
@@ -118,7 +120,7 @@ def logResults (results, mode) :
             os.makedirs(myPath + archiveDirectory)
 
         name = str(datetime.datetime.now()).replace('-','').replace(':','').replace('.','').replace(' ','')+".csv"
-        archiveFile = myPath + archiveDirectory + name
+        archiveFile = myPath + archiveDirectory + "/" + name
         os.rename(logFile,archiveFile)
         heading = "serverID,server name,location,datetime,?,ping,download,upload"
         open(logFile, 'ab').write(heading)

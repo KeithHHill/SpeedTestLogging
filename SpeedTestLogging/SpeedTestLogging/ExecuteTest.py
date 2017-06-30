@@ -55,7 +55,7 @@ results = Logging.executeTest()
 
 #log the results into a local file
 if loggingEnabled == "true" :
-    Logging.logResults (results, "standard")
+    Logging.logResults (results, "standard", 0)
 
 
 #email the results if below a certain threshhold
@@ -75,7 +75,7 @@ if ((results.download < minDownload or results.upload < minUpload) and extendedL
         results = Logging.executeTest()
         
         # log the results
-        Logging.logResults (results, "extended")
+        Logging.logResults (results, "extended", count)
 
         # increment and see if we should break the loop
         count += 1
